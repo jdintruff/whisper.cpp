@@ -339,6 +339,12 @@ int main(int argc, char ** argv) {
 
                         if (params.fname_out.length() > 0) {
                             fout << text;
+                            std::time_t currentTime = std::time(nullptr);
+                            std::tm* timeInfo = std::localtime(&currentTime);
+                            // Format the timestamp
+                            char timestamp[20];
+                            std::strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", timeInfo);
+                            fout << timestamp << " " << text;
                         }
                     } else {
                         const int64_t t0 = whisper_full_get_segment_t0(ctx, i);
